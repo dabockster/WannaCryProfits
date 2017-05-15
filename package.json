@@ -1,0 +1,28 @@
+{
+  "name": "wanna-cry-profits",
+  "version": "1.0.0",
+  "description": "Quick and dirty website to track WannaCry's BTC profits",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabockster/WannaCryProfits.git"
+  },
+  "author": "Steven Bock",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dabockster/WannaCryProfits/issues"
+  },
+  "homepage": "https://github.com/dabockster/WannaCryProfits#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.6",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "morgan": "^1.8.1",
+    "serve-favicon": "^2.4.2"
+  }
+}
