@@ -1,5 +1,5 @@
 # WannaCryProfits
-This is a quick and dirty website used to track the profits made by the WannaCry ransomware. [Based on a Python script written by sp4rk2.](https://github.com/sp4rk2/wcrypt)
+This is a quick and dirty website used to track the profits made by the WannaCry ransomware. [Based on a Python script written by sp4rk2.](https://twitter.com/sp4rk2_)
 
 ## FAQ
 
