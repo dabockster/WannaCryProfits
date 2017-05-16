@@ -1,6 +1,6 @@
 var express = require('express'),
     config  = require('../config.js'),
-    btc     = require('../controllers/btc_processor.js');
+    btc     = require('../utils/btc_processor.js');
 
 var router = express.Router();
 
