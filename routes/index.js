@@ -8,49 +8,77 @@ var router = express.Router();
 router.get('/', function(req, res){
 
   //set up api call with multiple addresses
-  var api = "https://blockchain.info/multiaddr?active="
+  var addrApi = "https://blockchain.info/multiaddr?active="
   for (i in config.addresses){
-    api += config.addresses[i] + "|";
+    addrApi += config.addresses[i] + "|";
   }
 
-  //cut off last '|' in the api url
-  api = api.substring(0, api.length - 1);
+  //cut off last '|' in the addrApi url
+  addrApi = addrApi.substring(0, addrApi.length - 1);
 
-  //make the api call
-  request(api, function(error, response, body){
-    //if data is received, process it
-    if (!error && response.statusCode == 200){
-      //get raw data from api response
-      var blockchainData = JSON.parse(body).addresses;
+  //init urls array to store each API url
+  var urls = [];
+  urls.push(addrApi);
+  urls.push("https://api.coinbase.com/v2/prices/spot?currency=USD");
 
-      //init variable for storing total received BTC for all WannaCry addresses
-      var addressData = {};
+  //callback function
+  __request(urls, function(responses){
+    //get raw data from api response
+    var blockchainData = JSON.parse(responses[0].body).addresses;
 
-      //init variable for counting the total amount of BTC across all WannaCry addresses
-      var totalBTC = 0;
+    //init variable for storing total received BTC for all WannaCry addresses
+    var addressData = {};
 
-      if (config.addresses.length != blockchainData.length){
-        console.error("ERROR: Prefilled address length does not match Blockchain API data!");
-      }
+    //init variable for counting the total amount of BTC across all WannaCry addresses
+    var totalBTC = 0;
 
-      for(i=0; i<config.addresses.length; i++){
-        var currentAddress = config.addresses[i];
-        var currentTotal = blockchainData[i].total_received;
-
-        addressData[currentAddress] = currentTotal
-        totalBTC += currentTotal;
-      }
-
-      //render the page after the data has beenr received
-      res.render('home', {
-        addressData: addressData,
-        totalBTC: totalBTC
-      });
+    if (config.addresses.length != blockchainData.length){
+      console.error("ERROR: Prefilled address length does not match Blockchain API data!");
     }
-    else{
-      res.send("ERROR: " + error);
+
+    for(i=0; i<config.addresses.length; i++){
+      var currentAddress = config.addresses[i];
+      var currentTotal = blockchainData[i].total_received;
+
+      addressData[currentAddress] = currentTotal
+      totalBTC += currentTotal;
     }
+
+    //render the page after the data has beenr received
+    res.render('home', {
+      addressData: addressData,
+      totalBTC: totalBTC
+    });
   });
+
+  //make the api calls
+  var __request = function(urls, callback){
+    //init object to store responses
+    var results = {};
+
+    var urlNum = urls.length;
+
+    var connectionCount = 0;
+
+    var handler = function(error, response, body){
+      //assmeble response data
+      var url = response.request.uri.href;
+      results[url] = {
+        error: error,
+        response: response,
+        body: body
+      };
+
+      //if the data has been fetched, execute callback function
+      if (connectionCount++ === urls.length){
+        callback(results);
+      }
+
+      while(urlNum --){
+        request(urls[urlNum], handler);
+      }
+    }
+  }
 });
 
 module.exports = router;
