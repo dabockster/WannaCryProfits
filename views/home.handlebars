@@ -3,7 +3,18 @@
 <p>Stats for each known BTC address:</p>
 <br>
 
-{{#each address}}
-<p class="btcaddress">{{this}}</p>
+{{#each addressData}}
+<div>
+    <span class="regularText">Address: </span>
+    <br>
+    <span class="btcaddress">{{@key}}</span>
+</div>
+<br>
+<div>
+    <span class="regularText">Value (BTC): </span>
+    <br>
+    <span class ="addrvalue">{{this}} BTC</span>
+</div>
+<br>
 <br>
 {{/each}}
