@@ -54,25 +54,29 @@
 				$currentTotal = substr_replace($currentTotal, ".", -8, -8);
 
 				//compute total USD value for selected address
-				$usdValue = number_format($usdPrice * $currentTotal);
+				$usdValue = number_format($usdPrice * $currentTotal, 2);
 
 				//add total for currently selected address to running total
 				$totalBTC = $totalBTC + $currentTotal;
 
 				//template HTML containing address stats
-				echo "<div>\n" .
-							"<span class=\"regularText\">Address: </span>\n" .
-							"<span class=\"btcaddress\">" . $btcData[$i]['address'] . "</span>" .
+				echo
+						"<div>\n" .
+							"<span class=\"regularText\">Blockchain Address: " .
+							"<a class = \"btcaddress\" href=\"https://blockchain.info/address/" . $btcData[$i]['address'] . "\">" . $btcData[$i]['address'] . "</a>" .
+							"</span>\n" .
+							"<span class=\"btcaddress\">" .
+							"</span>" .
 						"</div>\n" .
 						"<br>\n" .
 						"<div>\n" .
-							"<span class=\"regularText\">Value (BTC): </span>\n" .
+							"<span class=\"regularText\">Current BTC Value: </span>\n" .
 							"<span class=\"addrvalue\">" . $currentTotal . " BTC</span>" .
 						"</div>\n" .
 						"<br>\n" .
 						"<div>\n" .
-							"<span class=\"regularText\">Value (USD): </span>\n" .
-							"<span cladd=\"usdvalue\">$" . $usdValue . "</span>\n" .
+							"<span class=\"regularText\">Current USD Value: </span>\n" .
+							"<span class=\"usdvalue\">$" . $usdValue . "</span>\n" .
 						"</div>\n" .
 						"<br>\n" .
 						"<br>\n"
@@ -80,11 +84,29 @@
 	    }
 
 			//compute total USD value of total BTC count
-			$totalUSD = number_format($totalBTC * $usdPrice);
+			$totalUSD = $totalBTC * $usdPrice;
+
+			//compute possible number of ransomes paid
+			$totalRansomsPaid = $totalUSD / 300;
+
+			//format totals for readability
+			$totalUSD = number_format($totalUSD, 2);
+			$totalRansomsPaid = number_format($totalRansomsPaid);
 
 			//template HTML containing overall totals
-			echo "<h3>Total BTC spent by WannaCry victims: " . $totalBTC . " BTC</h3>\n" .
-					"<h3>Current USD equivalent: <u>$" . $totalUSD . "</u></h3>\n";
+			echo
+					"<div class =\"highlights\">\n" .
+						"<span>Estimated WannaCry ransomes paid (assuming $300 USD per infection): </span>\n" .
+						"<span>" . $totalRansomsPaid . "</span>\n" .
+						"<br>\n" .
+						"<br>\n" .
+						"<span>Total BTC spent by WannaCry victims: </span>\n" .
+						"<span>" . $totalBTC . " BTC</span>\n" .
+						"<br>\n" .
+						"<br>\n" .
+						"<span>Current USD equivalent total: </span>\n" .
+						"<span>$" . $totalUSD . "</span>\n" .
+					"</div>";
 		?>
 		<p>* USD prices for BTC are obtained from <a href="https://coinbase.com">CoinBase</a>.</p>
 	</body>
