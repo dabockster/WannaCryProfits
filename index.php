@@ -86,7 +86,7 @@
 			//compute total USD value of total BTC count
 			$totalUSD = $totalBTC * $usdPrice;
 
-			//compute possible number of ransomes paid
+			//compute possible number of ransoms paid
 			$totalRansomsPaid = $totalUSD / 300;
 
 			//format totals for readability
@@ -96,7 +96,7 @@
 			//template HTML containing overall totals
 			echo
 					"<div class =\"highlights\">\n" .
-						"<span>Estimated WannaCry ransomes paid (assuming $300 USD per infection): </span>\n" .
+						"<span>Estimated WannaCry ransoms paid (assuming $300 USD per infection): </span>\n" .
 						"<span class=\"addrvalue\">" . $totalRansomsPaid . "</span>\n" .
 						"<br>\n" .
 						"<br>\n" .
