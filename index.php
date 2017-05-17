@@ -50,23 +50,29 @@
 				//get total btc for currently selected address
 				$currentTotal = $btcData[$i]['total_received'];
 
+				//format current total to correct API data for satoshi values -> -8
+				$currentTotal = substr_replace($currentTotal, ".", -8, -8);
+
 				//compute total USD value for selected address
-				$usdValue = $usdPrice * $currentTotal;
+				$usdValue = number_format($usdPrice * $currentTotal);
 
 				//add total for currently selected address to running total
 				$totalBTC = $totalBTC + $currentTotal;
 
 				//template HTML containing address stats
 				echo "<div>\n" .
-							"<span class=\"regularText\">Address: " . $btcData[$i]['address'] . "</span>\n" .
+							"<span class=\"regularText\">Address: </span>\n" .
+							"<span class=\"btcaddress\">" . $btcData[$i]['address'] . "</span>" .
 						"</div>\n" .
 						"<br>\n" .
 						"<div>\n" .
-							"<span class=\"regularText\">Value (BTC): " . $currentTotal . "</span>\n" .
+							"<span class=\"regularText\">Value (BTC): </span>\n" .
+							"<span class=\"addrvalue\">" . $currentTotal . " BTC</span>" .
 						"</div>\n" .
 						"<br>\n" .
 						"<div>\n" .
-							"<span class=\"regularText\">Value (USD): " . $usdValue . "</span>\n" .
+							"<span class=\"regularText\">Value (USD): </span>\n" .
+							"<span cladd=\"usdvalue\">$" . $usdValue . "</span>\n" .
 						"</div>\n" .
 						"<br>\n" .
 						"<br>\n"
@@ -74,7 +80,7 @@
 	    }
 
 			//compute total USD value of total BTC count
-			$totalUSD = $totalBTC * $usdPrice;
+			$totalUSD = number_format($totalBTC * $usdPrice);
 
 			//template HTML containing overall totals
 			echo "<h3>Total BTC spent by WannaCry victims: " . $totalBTC . " BTC</h3>\n" .
