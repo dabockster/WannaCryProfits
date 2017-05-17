@@ -2,7 +2,9 @@
 <html>
 	<head>
 		<title>WannaCry Profits</title>
-		<link href="style.css" rel="stylesheet">
+		<meta charset="utf-8">
+		<meta description="Track the WannaCry ransomware's profits in real time.">
+		<link href="style.css" rel="stylesheet" media="screen" />
 	</head>
 	<body>
     <h1>WannaCry Profits</h1>
@@ -116,5 +118,8 @@
 		<br>
 		<p>If you found this information useful, consider tipping me some BTC.</p>
 		<p>1JwAifJtE9SXocZe2MvXTK1pdbCHPYwFVY</p>
+
+		<!-- Scripts go below this line -->
+		<script src="./js/analytics.js" />
 	</body>
 </html>
