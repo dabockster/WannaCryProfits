@@ -62,7 +62,7 @@
 				//template HTML containing address stats
 				echo
 						"<div>\n" .
-							"<span class=\"regularText\">Blockchain Address: " .
+							"<span>Blockchain Address: " .
 							"<a class = \"btcaddress\" href=\"https://blockchain.info/address/" . $btcData[$i]['address'] . "\">" . $btcData[$i]['address'] . "</a>" .
 							"</span>\n" .
 							"<span class=\"btcaddress\">" .
@@ -70,12 +70,12 @@
 						"</div>\n" .
 						"<br>\n" .
 						"<div>\n" .
-							"<span class=\"regularText\">Current BTC Value: </span>\n" .
+							"<span>Current BTC Value: </span>\n" .
 							"<span class=\"addrvalue\">" . $currentTotal . " BTC</span>" .
 						"</div>\n" .
 						"<br>\n" .
 						"<div>\n" .
-							"<span class=\"regularText\">Current USD Value: </span>\n" .
+							"<span>Current USD Value: </span>\n" .
 							"<span class=\"usdvalue\">$" . $usdValue . "</span>\n" .
 						"</div>\n" .
 						"<br>\n" .
@@ -97,17 +97,24 @@
 			echo
 					"<div class =\"highlights\">\n" .
 						"<span>Estimated WannaCry ransomes paid (assuming $300 USD per infection): </span>\n" .
-						"<span>" . $totalRansomsPaid . "</span>\n" .
+						"<span class=\"addrvalue\">" . $totalRansomsPaid . "</span>\n" .
 						"<br>\n" .
 						"<br>\n" .
 						"<span>Total BTC spent by WannaCry victims: </span>\n" .
-						"<span>" . $totalBTC . " BTC</span>\n" .
+						"<span class=\"addrvalue\">" . $totalBTC . " BTC</span>\n" .
 						"<br>\n" .
 						"<br>\n" .
 						"<span>Current USD equivalent total: </span>\n" .
-						"<span>$" . $totalUSD . "</span>\n" .
+						"<span class=\"usdvalue\">$" . $totalUSD . "</span>\n" .
 					"</div>";
 		?>
 		<p>* USD prices for BTC are obtained from <a href="https://coinbase.com">CoinBase</a>.</p>
+		<br>
+		<p>This website was built as a favor to the digital community by <a href="http://stevenbock.me">Steven Bock</a>.</p>
+		<p>If you have any questions or comments, feel free to contact me via <a href="mailto:steven@stevenbock.me">eMail</a> or on <a href="https://twitter.com/dabockster">Twitter</a>.
+		<p>You can also follow further development of this site on <a href="https://github.com/dabockster/WannaCryProfits">GitHub</a>.</p>
+		<br>
+		<p>If you found this information useful, consider tipping me some BTC.</p>
+		<p>1JwAifJtE9SXocZe2MvXTK1pdbCHPYwFVY</p>
 	</body>
 </html>

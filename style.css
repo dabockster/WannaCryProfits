@@ -1,10 +1,10 @@
 * {
-  background-color: #575757;
+  background-color: black;
   color: white;
 }
 body {
   padding-left: 1em;
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 .btcaddress{
@@ -16,5 +16,10 @@ body {
 }
 
 .usdvalue{
-  color: #EE5338;
+  color: #FF3434;
+}
+
+.highlights{
+  font-size: 1.2em;
+  font-weight: bold;
 }
